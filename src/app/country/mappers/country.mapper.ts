@@ -1,18 +1,19 @@
 import {CountryInterface} from '../interfaces/country.interface';
+import {RESCountry} from '../interfaces/rest-country-response';
 
 export class CountryMapper {
-  static mapCountryResponseToInterface(country: any): CountryInterface {
+  static mapRestCountryToCountry(country: RESCountry): CountryInterface {
     return {
       cca2: country.cca2,
-      flag: country.flags.png,
+      flag: country.flag,
       flagSvg: country.flags.svg,
-      name: country.name.common,
-      capital: country.capital ? country.capital[0] : 'No capital',
+      name: country.translations['spa'].common ?? 'No Spanish Translation',
+      capital: country.capital.join(', '),
       population: country.population
     };
   }
 
-  static mapCountriesResponseToInterface(countries: any[]): CountryInterface[] {
-    return countries.map(this.mapCountryResponseToInterface);
+  static mapRestCountryArrayToCountryArray(countries: RESCountry[]): CountryInterface[] {
+    return countries.map(this.mapRestCountryToCountry);
   }
 }
