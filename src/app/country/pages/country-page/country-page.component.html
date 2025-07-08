@@ -7,7 +7,7 @@
 }
 
 @if (countryResource.hasValue()) {
-  <country-information [country]="countryResource.value()?.at(0)!" />
+  <country-information [country]="countryResource.value()!.at(0)!" />
 }
 
 
